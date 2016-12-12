@@ -1,0 +1,45 @@
+<html>
+<head>
+<title>Belajar slide up</title>
+<style>
+.tulisan{
+overflow:hidden;
+width:auto;
+height:19px;
+padding:0px 0px 0px 0px;
+}
+.tulisan span {
+display:block;
+}
+.tulisan::after{
+content:attr(nama_data);
+}
+
+.tulisan, span{
+-webkit-transition:0.3s;
+-moz-transition:0.3s;
+-ms-transition:0.3s;
+transition:0.3s;
+}
+
+.tulisan:hover span{
+margin-top:-19px;
+}
+</style>
+</head>
+<div class="tulisan" nama_data="HOVER ME">
+<span>
+HOVER ME
+</span>
+</div>
+
+<div class="tulisan" nama_data="hello">
+<span>hello</span>
+</div>
+
+<br>
+<div class="tulisan" nama_data="Ken Du Eniting">
+<span>Ken Du Eniting</span>
+</div>
+
+</html>
