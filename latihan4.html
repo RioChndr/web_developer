@@ -1,0 +1,122 @@
+<html>
+<head>
+<link rel="stylesheet" href="bootstrap.min.css">
+<style>
+	ol li{
+		width:100%;
+	}
+	ol li button{
+		float:right;
+	}
+</style>
+</head>
+<body>
+<div id="app-ku">
+<div class="container">
+	<br>
+	<div class="row">
+		<div class="col-md-12">
+			<center><h3>Aplikasi Created with vue JS</h3></center>
+			
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<inputform class="col-md-5" v-on:v_send_data="input_data_2"></inputform>
+		<br>
+		<div class="col-md-7">
+			<ol class="list-group">
+				<li class="list-group-item" v-for="(d, index) in data_nama" :key="d.id">{{ d.nama }}, ( {{ d.jk }} ) <div ><button class="btn btn-sm btn-danger" title="hapus data ini" @click="hapusData(index)">X</button></div></li>
+			</ol>
+		</div>
+	</div>
+</div>
+<br>
+<div class="footer">
+<center>Created with &#10084; Rio Chandra
+	</div>
+</div>
+
+
+<template id="input" >
+	<div>
+		<div class="card">
+			<div class="card-header">
+				Input Data
+			</div>
+			<div class="card-body" style="padding:10px;">
+				<div class="form-group">
+					<input class="form-control" type="text" name="nama" placeholder="Nama ..." v-model="data.nama"><br>
+					<div class="form-control">
+						<label class="radio"><input type="radio" name="jk" v-model="data.jk" value="Laki-laki">Laki-laki</label><br>
+						<label class="radio"><input type="radio" name="jk" v-model="data.jk" value="Perempuan">Perempuan</label>
+					</div>
+					<br>
+					<input class="form-control btn" type="submit" name="submit" value="Masukkan" @click="input_data" :class="{'btn-disable':valForm, 'btn-primary':!valForm}" :disabled="valForm">
+				</div>
+			</div>
+		</div>
+</div>
+</template>
+<script src="vue_dev.js"></script>
+<script type="text/javascript">
+
+Vue.component("inputform",{
+	data(){
+		return{
+			data:{
+				nama:"",
+				jk:""
+			}
+		}
+	},
+	template:"#input",
+	methods:{
+		input_data:function(){
+			this.$emit("v_send_data", this.data);
+			this.data.nama="";
+			this.data.jk="";
+		},
+		input_data_1:function(){
+			alert("kamu dipanggild isin");
+		}
+	},
+	computed:{
+		valForm:function(){
+			if(this.data.nama != "" && this.data.jk != ""){
+				return false;
+			}
+			return true;
+		}
+	}
+})
+
+var appku = new Vue({
+	el:"#app-ku",
+	data:{
+			data_nama:[
+			{
+				nama:"Rio Chandra",
+				jk:"Laki-laki"
+			},{
+				nama:"Delma Saputri",
+				jk:"perempuan"
+			}
+		]	
+	},
+	methods:{
+		hapusData:function(v){
+			this.data_nama.splice(v, 1);
+		},
+		input_data_2(q){
+			this.data_nama.push({
+				nama:q.nama,
+				jk:q.jk
+			})
+		}
+	}
+})
+	
+</script>
+</body>
+</html>
